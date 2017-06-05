@@ -12,10 +12,38 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QPixmap q("o.jpg");
+    QImage o;
+    QImage x;
 
-    ui->label_2->setPixmap(q);
-    ui->label->show();
+    bool o_loading = o.load("o.jpg");
+    bool x_loading = x.load("x.jpg");
+
+    if(o_loading && x_loading)
+      {
+         ui->label_10->setText("OK");
+
+        ui->label->setPixmap(QPixmap::fromImage(o));
+
+        ui->label_4->setPixmap(QPixmap::fromImage(x));
+
+        ui->label_2->setPixmap(QPixmap::fromImage(o));
+        ui->label_5->setPixmap(QPixmap::fromImage(o));
+
+        ui->label_3->setPixmap(QPixmap::fromImage(x));
+        ui->label_4->setPixmap(QPixmap::fromImage(x));
+
+        ui->label_6->setPixmap(QPixmap::fromImage(o));
+        ui->label_7->setPixmap(QPixmap::fromImage(x));
+        ui->label_8->setPixmap(QPixmap::fromImage(x));
+      }
+    else
+      {
+        ui->label_10->setText("Error - unabled to load image");
+      }
+
+
+    ui->label_10->show();
+
 }
 
 MainWindow::~MainWindow()
@@ -26,6 +54,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    QPixmap mypix ("o.jpg");
-    ui->label->setPixmap(mypix);
+    ui->pushButton->setEnabled(false);
 }
+

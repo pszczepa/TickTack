@@ -1,6 +1,7 @@
 #ifndef GRA_H
 #define GRA_H
 
+#include "tura.h"
 
 class Gra
 {
@@ -24,7 +25,6 @@ class Gra
     const int _PUSTE    = 0;
 
     int _plansza[3][3];
-
 
 public:
     Gra();

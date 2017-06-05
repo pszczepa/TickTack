@@ -4,7 +4,7 @@ Gra::Gra()
 {
     for(auto i = 0; i < 3; ++i)
     {
-        for(auto j = 0; i < 3; ++j)
+        for(auto j = 0; j < 3; ++j)
         {
             _plansza[i][j] = _PUSTE;
         }

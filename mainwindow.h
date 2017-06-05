@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <memory>
 #include <vector>
+#include <QFileDialog>
 
 namespace Ui {
 class MainWindow;
@@ -18,9 +19,8 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_pressed();
 
-    void on_pushButton_clicked();
+  void on_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;

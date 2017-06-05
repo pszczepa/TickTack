@@ -25,6 +25,9 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QFrame" name="frame">
     <property name="geometry">
@@ -325,6 +328,15 @@
        <height>100</height>
       </rect>
      </property>
+     <property name="maximumSize">
+      <size>
+       <width>100</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"> background-color : white;</string>
+     </property>
      <property name="frameShape">
       <enum>QFrame::Box</enum>
      </property>
@@ -340,6 +352,15 @@
        <width>100</width>
        <height>100</height>
       </rect>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>100</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"> background-color : white;</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::Box</enum>
@@ -357,6 +378,15 @@
        <height>100</height>
       </rect>
      </property>
+     <property name="maximumSize">
+      <size>
+       <width>100</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"> background-color : white;</string>
+     </property>
      <property name="frameShape">
       <enum>QFrame::Box</enum>
      </property>
@@ -372,6 +402,15 @@
        <width>100</width>
        <height>100</height>
       </rect>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>100</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"> background-color : white;</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::Box</enum>
@@ -389,6 +428,15 @@
        <height>100</height>
       </rect>
      </property>
+     <property name="maximumSize">
+      <size>
+       <width>100</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"> background-color : white;</string>
+     </property>
      <property name="frameShape">
       <enum>QFrame::Box</enum>
      </property>
@@ -404,6 +452,15 @@
        <width>100</width>
        <height>100</height>
       </rect>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>100</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"> background-color : white;</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::Box</enum>
@@ -421,6 +478,15 @@
        <height>100</height>
       </rect>
      </property>
+     <property name="maximumSize">
+      <size>
+       <width>100</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"> background-color : white;</string>
+     </property>
      <property name="frameShape">
       <enum>QFrame::Box</enum>
      </property>
@@ -436,6 +502,15 @@
        <width>100</width>
        <height>100</height>
       </rect>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>100</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"> background-color : white;</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::Box</enum>
@@ -490,6 +565,15 @@
        <height>100</height>
       </rect>
      </property>
+     <property name="maximumSize">
+      <size>
+       <width>100</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"> background-color : white;</string>
+     </property>
      <property name="frameShape">
       <enum>QFrame::Box</enum>
      </property>
@@ -515,6 +599,22 @@
     <zorder>pushButton_8</zorder>
     <zorder>pushButton_9</zorder>
     <zorder>pushButton</zorder>
+   </widget>
+   <widget class="QLabel" name="label_10">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>100</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
