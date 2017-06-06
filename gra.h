@@ -2,6 +2,7 @@
 #define GRA_H
 
 #include "tura.h"
+#include "przyciski.h"
 
 class Gra
 {
@@ -17,15 +18,17 @@ class Gra
     int _poziomTrudnosci;
 
     const int _KOLKO    = 1;
-    const int _KRZYZYK  = 2;
+    const int _KRZYZYK  = -1;
     const int _PUSTE    = 0;
 
     int _plansza[3][3];
 
-    Tura _tura;
+
+
 
 
 public:
+
     Gra();
 
     void UstawPoziomTrudnosci(int const);
@@ -39,6 +42,10 @@ public:
     bool Wypelnij(int const , int const);
 
     int ReturnPoziom();
+
+    Przyciski _przyciski;
+
+        Tura _tura;
 
 };
 

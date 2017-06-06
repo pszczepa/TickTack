@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QLabel>
+#include <QPushButton>
 
 #include <memory>
 
@@ -41,7 +43,13 @@ private:
 
     Gra  * _gra;
 
+    std::vector<std::shared_ptr<QLabel>> v_labels;
+
+    std::vector<std::shared_ptr<QPushButton>> v_buttons;
+
     void enableAll();
+
+    void button_service(int const , int const, unsigned int button);
 
 };
 

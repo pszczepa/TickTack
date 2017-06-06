@@ -5,7 +5,7 @@
 class Tura
 {
 
-    bool _turaGracza;
+    bool _turaGry;
 
 public:
     Tura();

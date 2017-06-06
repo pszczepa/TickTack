@@ -2,16 +2,16 @@
 
 Tura::Tura()
 {
-  _turaGracza = true;
+  _turaGry = false;
 }
 
 void Tura::ZamienTure()
 {
-    _turaGracza = !_turaGracza;
+    _turaGry = !_turaGry;
 }
 
 bool Tura::ZwrocTure()
 {
-    return _turaGracza;
+    return _turaGry;
 }
 

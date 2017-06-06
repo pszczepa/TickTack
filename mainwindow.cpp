@@ -4,6 +4,8 @@
 #include "przyciski.h"
 #include "gra.h"
 
+#include <vector>
+
 
 MainWindow::MainWindow(Gra * gra, QWidget *parent) :
     QMainWindow(parent),
@@ -11,6 +13,47 @@ MainWindow::MainWindow(Gra * gra, QWidget *parent) :
     _gra(gra)
 {
     ui->setupUi(this);
+
+    std::shared_ptr<QLabel> ptr_label(ui->label);
+    std::shared_ptr<QLabel> ptr_label2(ui->label_2);
+    std::shared_ptr<QLabel> ptr_label3(ui->label_3);
+    std::shared_ptr<QLabel> ptr_label4(ui->label_4);
+    std::shared_ptr<QLabel> ptr_label5(ui->label_5);
+    std::shared_ptr<QLabel> ptr_label6(ui->label_6);
+    std::shared_ptr<QLabel> ptr_label7(ui->label_7);
+    std::shared_ptr<QLabel> ptr_label8(ui->label_8);
+    std::shared_ptr<QLabel> ptr_label9(ui->label_9);
+
+    std::shared_ptr<QPushButton> ptr_button1(ui->pushButton_1);
+    std::shared_ptr<QPushButton> ptr_button2(ui->pushButton_2);
+    std::shared_ptr<QPushButton> ptr_button3(ui->pushButton_3);
+    std::shared_ptr<QPushButton> ptr_button4(ui->pushButton_4);
+    std::shared_ptr<QPushButton> ptr_button5(ui->pushButton_5);
+    std::shared_ptr<QPushButton> ptr_button6(ui->pushButton_6);
+    std::shared_ptr<QPushButton> ptr_button7(ui->pushButton_7);
+    std::shared_ptr<QPushButton> ptr_button8(ui->pushButton_8);
+    std::shared_ptr<QPushButton> ptr_button9(ui->pushButton_9);
+
+    v_labels.push_back(ptr_label);
+    v_labels.push_back(ptr_label2);
+    v_labels.push_back(ptr_label3);
+    v_labels.push_back(ptr_label4);
+    v_labels.push_back(ptr_label5);
+    v_labels.push_back(ptr_label6);
+    v_labels.push_back(ptr_label7);
+    v_labels.push_back(ptr_label8);
+    v_labels.push_back(ptr_label9);
+
+    v_buttons.push_back(ptr_button1);
+    v_buttons.push_back(ptr_button2);
+    v_buttons.push_back(ptr_button3);
+    v_buttons.push_back(ptr_button4);
+    v_buttons.push_back(ptr_button5);
+    v_buttons.push_back(ptr_button6);
+    v_buttons.push_back(ptr_button7);
+    v_buttons.push_back(ptr_button8);
+    v_buttons.push_back(ptr_button9);
+
 }
 
 MainWindow::~MainWindow()
@@ -20,57 +63,47 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_1_clicked()
 {
-  _gra->Wypelnij(0,0);
-  ui->pushButton_1->setEnabled(false);
-  ui->label->setPixmap();
+  button_service(0,0,0);
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
-  _gra->Wypelnij(0,1);
-  ui->pushButton_2->setEnabled(false);
+   button_service(0,1,1);
 }
 
 void MainWindow::on_pushButton_3_clicked()
 {
-  _gra->Wypelnij(0,2);
-  ui->pushButton_3->setEnabled(false);
+   button_service(0,2,2);
 }
 
 void MainWindow::on_pushButton_4_clicked()
 {
-  _gra->Wypelnij(1,0);
-  ui->pushButton_4->setEnabled(false);
+   button_service(1,0,3);
 }
 
 void MainWindow::on_pushButton_5_clicked()
 {
-  _gra->Wypelnij(1,1);
-  ui->pushButton_5->setEnabled(false);
+   button_service(1,1,4);
 }
 
 void MainWindow::on_pushButton_6_clicked()
 {
-  _gra->Wypelnij(1,2);
-  ui->pushButton_6->setEnabled(false);
+   button_service(1,2,5);
 }
 
 void MainWindow::on_pushButton_7_clicked()
 {
-  _gra->Wypelnij(2,0);
-  ui->pushButton_7->setEnabled(false);
+   button_service(2,0,6);
 }
 
 void MainWindow::on_pushButton_8_clicked()
 {
-  _gra->Wypelnij(2,1);
-  ui->pushButton_8->setEnabled(false);
+   button_service(2,1,7);
 }
 
 void MainWindow::on_pushButton_9_clicked()
 {
-  _gra->Wypelnij(2,2);
-  ui->pushButton_9->setEnabled(false);
+  button_service(2,2,8);
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -116,23 +149,34 @@ void MainWindow::on_pushButton_10_clicked()
 
 void MainWindow::enableAll()
 {
-  ui->pushButton_1->setEnabled(true);
-  ui->pushButton_2->setEnabled(true);
-  ui->pushButton_3->setEnabled(true);
-  ui->pushButton_4->setEnabled(true);
-  ui->pushButton_5->setEnabled(true);
-  ui->pushButton_6->setEnabled(true);
-  ui->pushButton_7->setEnabled(true);
-  ui->pushButton_8->setEnabled(true);
-  ui->pushButton_9->setEnabled(true);
 
-  ui->label->setEnabled(true);
-  ui->label_2->setEnabled(true);
-  ui->label_3->setEnabled(true);
-  ui->label_4->setEnabled(true);
-  ui->label_5->setEnabled(true);
-  ui->label_6->setEnabled(true);
-  ui->label_7->setEnabled(true);
-  ui->label_8->setEnabled(true);
-  ui->label_9->setEnabled(true);
+  for(size_t i = 0; i < v_labels.size(); ++i)
+    {
+       v_labels.at(i)->setEnabled(true);
+    }
+
+  for(size_t i = 0; i < v_buttons.size(); ++i)
+    {
+       v_buttons.at(i)->setEnabled(true);
+    }
+}
+
+void MainWindow::button_service(const int x, const int y, unsigned int button)
+{
+  QImage temp;
+
+  if(_gra->_tura.ZwrocTure())
+    {
+      temp = _gra->_przyciski.oReturn();
+    }
+  else
+    {
+      temp = _gra->_przyciski.xReturn();
+    }
+
+    _gra->Wypelnij(x,y);
+    v_buttons.at(button)->setEnabled(false);
+
+    v_labels.at(button)->setPixmap(QPixmap::fromImage(temp));
+    _gra->_tura.ZamienTure();
 }
