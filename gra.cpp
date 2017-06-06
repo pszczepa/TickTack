@@ -29,3 +29,27 @@ bool Gra::ZwrocWynik()
 {
     return _ktoWygral;
 }
+
+bool Gra::Wypelnij(int const nr_przycisku)
+{
+  int x = nr_przycisku / 3 ;
+  int y = nr_przycisku - 6;
+
+
+
+  if(_plansza[x][y] != _PUSTE)
+    {
+      return false;
+    }
+  else
+    {
+      if(_tura.ZwrocTure())
+        {
+          _plansza[x][y] = _KRZYZYK;
+        }
+    }
+
+
+
+  return true;
+}

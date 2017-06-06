@@ -1,7 +1,9 @@
 #include "tura.h"
 
 Tura::Tura()
-{}
+{
+  _turaGracza = true;
+}
 
 void Tura::ZamienTure()
 {

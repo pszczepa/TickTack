@@ -2,16 +2,29 @@
 
 Przyciski::Przyciski()
 {
-    _krzyzyk.load("x.jpg", nullptr);
-    _kolko.load("o.jpg", nullptr);
+   _x_stan = _X.load("x.jpg");
+   _o_stan = _O.load("o.jpg");
 }
 
-QPicture Przyciski::xReturn()
+Przyciski::Przyciski(bool inne)
 {
-    return _krzyzyk;
+   if(inne)
+     {
+
+     }
+   else
+     {
+       Przyciski();
+     }
+
 }
 
-QPicture Przyciski::oReturn()
+QImage Przyciski::xReturn()
 {
-    return _kolko;
+    return _X;
+}
+
+QImage Przyciski::oReturn()
+{
+    return _O;
 }

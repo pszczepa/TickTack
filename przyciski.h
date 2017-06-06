@@ -6,14 +6,19 @@
 
 class Przyciski
 {
-    QPicture _krzyzyk;
-    QPicture _kolko;
+    QImage _X;
+    QImage _O;
+
+    bool  _x_stan;
+    bool  _o_stan;
 
 
 public:
     Przyciski();
-    QPicture xReturn();
-    QPicture oReturn();
+    Przyciski(bool);
+
+    QImage xReturn();
+    QImage oReturn();
 };
 
 #endif // PRZYCISKI_H

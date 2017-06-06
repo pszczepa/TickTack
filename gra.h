@@ -21,10 +21,13 @@ class Gra
     bool _ktoWygral;
 
     const int _KOLKO    = 1;
-    const int _KRZYRZYK = 2;
+    const int _KRZYZYK  = 2;
     const int _PUSTE    = 0;
 
     int _plansza[3][3];
+
+    Tura _tura;
+
 
 public:
     Gra();
@@ -34,6 +37,8 @@ public:
     void ZakonczGre();
 
     bool ZwrocWynik();
+
+    bool Wypelnij(int const );
 };
 
 #endif // GRA_H
