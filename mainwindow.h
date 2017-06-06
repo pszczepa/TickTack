@@ -2,9 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+
 #include <memory>
-#include <vector>
-#include <QFileDialog>
+
+#include "gra.h"
 
 namespace Ui {
 class MainWindow;
@@ -15,7 +16,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
+    explicit MainWindow(Gra * wsk_gra, QWidget *parent = 0);
     ~MainWindow();
 
 private slots:
@@ -31,8 +32,17 @@ private slots:
   void on_pushButton_9_clicked();
 
 
+  void on_pushButton_clicked();
+
+  void on_pushButton_10_clicked();
+
 private:
     Ui::MainWindow *ui;
+
+    Gra  * _gra;
+
+    void enableAll();
+
 };
 
 #endif // MAINWINDOW_H

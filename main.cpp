@@ -8,10 +8,13 @@
 
 int main(int argc, char *argv[])
 {
-    Przyciski przyciski;
-    Gra       gra;
+    Gra          gra;
+
     QApplication a(argc, argv);
-    MainWindow w;
+
+    MainWindow   w(&gra);
+
+
 
     w.show();
 

@@ -6,19 +6,15 @@
 class Gra
 {
 
-    /*
-     * Zmienna przechowuje wartość stanu gry.
-     *
-     */
     bool _czyStart;
 
-    /*
-     *
-     */
     bool _czyKoniec;
 
-
     bool _ktoWygral;
+
+    bool _czyPvC;
+
+    int _poziomTrudnosci;
 
     const int _KOLKO    = 1;
     const int _KRZYZYK  = 2;
@@ -32,13 +28,18 @@ class Gra
 public:
     Gra();
 
-    void RozpocznijGre();
+    void UstawPoziomTrudnosci(int const);
+
+    void RozpocznijGre(bool);
 
     void ZakonczGre();
 
     bool ZwrocWynik();
 
-    bool Wypelnij(int const );
+    bool Wypelnij(int const , int const);
+
+    int ReturnPoziom();
+
 };
 
 #endif // GRA_H

@@ -12,11 +12,18 @@ Gra::Gra()
 
 }
 
-void Gra::RozpocznijGre()
+void Gra::UstawPoziomTrudnosci(int poziom)
 {
-    _czyStart = true;
+   _poziomTrudnosci = poziom;
+}
+
+void Gra::RozpocznijGre(bool tryb)
+{
+    _czyStart  = true;
 
     _czyKoniec = false;
+
+    _czyPvC    = tryb;
 }
 
 void Gra::ZakonczGre()
@@ -30,13 +37,8 @@ bool Gra::ZwrocWynik()
     return _ktoWygral;
 }
 
-bool Gra::Wypelnij(int const nr_przycisku)
+bool Gra::Wypelnij(int const x, int const y)
 {
-  int x = nr_przycisku / 3 ;
-  int y = nr_przycisku - 6;
-
-
-
   if(_plansza[x][y] != _PUSTE)
     {
       return false;
@@ -49,7 +51,10 @@ bool Gra::Wypelnij(int const nr_przycisku)
         }
     }
 
-
-
   return true;
+}
+
+int Gra::ReturnPoziom()
+{
+  return _poziomTrudnosci;
 }
