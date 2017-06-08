@@ -4,6 +4,9 @@
 #include "tura.h"
 #include "przyciski.h"
 
+
+/* przerobić na dziedziczenie */
+
 class Gra
 {
 
@@ -43,9 +46,11 @@ public:
 
     int ReturnPoziom();
 
+    bool SprawdzCzyWygrana();
+
     Przyciski _przyciski;
 
-        Tura _tura;
+    Tura _tura;
 
 };
 

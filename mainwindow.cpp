@@ -179,4 +179,9 @@ void MainWindow::button_service(const int x, const int y, unsigned int button)
 
     v_labels.at(button)->setPixmap(QPixmap::fromImage(temp));
     _gra->_tura.ZamienTure();
+
+    if(_gra->SprawdzCzyWygrana())
+      {
+        ui->label_10->setText("Wygrana");
+      }
 }

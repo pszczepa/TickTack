@@ -43,7 +43,7 @@ private:
 
     Gra  * _gra;
 
-    std::vector<std::shared_ptr<QLabel>> v_labels;
+    std::vector<std::shared_ptr<QLabel>>      v_labels;
 
     std::vector<std::shared_ptr<QPushButton>> v_buttons;
 
