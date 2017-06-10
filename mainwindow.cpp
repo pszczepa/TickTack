@@ -131,20 +131,21 @@ void MainWindow::on_pushButton_clicked()
 
 }
 
-void MainWindow::on_pushButton_10_clicked()
+void MainWindow::on_pushButton_10_clicked() //start
 {
   if(ui->radioPvP->isChecked())
     {
-      _gra->RozpocznijGre(false);
+      _gra->UstawPvC(false);
     }
   else // AI
     {
-      _gra->RozpocznijGre(true);
+      _gra->UstawPvC(true);
       ui->frame_2->setEnabled(true);
     }
 
     ui->pushButton->setEnabled(true);
     ui->frame_3->setEnabled(false);
+
 }
 
 void MainWindow::enableAll()
@@ -165,23 +166,27 @@ void MainWindow::button_service(const int x, const int y, unsigned int button)
 {
   QImage temp;
 
-  if(_gra->_tura.ZwrocTure())
+  if(_gra->ZwrocTure())
     {
-      temp = _gra->_przyciski.oReturn();
+      temp = _gra->oReturn();
     }
   else
     {
-      temp = _gra->_przyciski.xReturn();
+      temp = _gra->xReturn();
     }
 
-    _gra->Wypelnij(x,y);
-    v_buttons.at(button)->setEnabled(false);
 
+    v_buttons.at(button)->setEnabled(false);
     v_labels.at(button)->setPixmap(QPixmap::fromImage(temp));
-    _gra->_tura.ZamienTure();
+
+    _gra->Wypelnij(x,y);
+    _gra->ZamienTure();
 
     if(_gra->SprawdzCzyWygrana())
       {
         ui->label_10->setText("Wygrana");
+        //Wygrano, ktos, jescze nie wiadomo kto, i co dalej ??
       }
+
+      _gra->DrukujPlansze();
 }

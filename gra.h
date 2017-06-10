@@ -1,13 +1,13 @@
 #ifndef GRA_H
 #define GRA_H
 
+#include <iostream>
+
 #include "tura.h"
 #include "przyciski.h"
 
 
-/* przerobić na dziedziczenie */
-
-class Gra
+class Gra : public Tura, public Przyciski
 {
 
     bool _czyStart;
@@ -25,10 +25,6 @@ class Gra
     const int _PUSTE    = 0;
 
     int _plansza[3][3];
-
-
-
-
 
 public:
 
@@ -48,9 +44,13 @@ public:
 
     bool SprawdzCzyWygrana();
 
-    Przyciski _przyciski;
+    bool ReturnPvC();
 
-    Tura _tura;
+    void DrukujPlansze();
+
+    int ReturnPlansza(int, int);
+
+    void UstawPvC(bool);
 
 };
 

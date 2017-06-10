@@ -3,6 +3,8 @@
 #include <QApplication>
 #include <QPicture>
 
+#include <iostream>
+
 #include "przyciski.h"
 #include "gra.h"
 

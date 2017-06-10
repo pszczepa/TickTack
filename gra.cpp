@@ -47,9 +47,17 @@ bool Gra::Wypelnij(int const x, int const y)
     }
   else
     {
-      if(_tura.ZwrocTure())
+      if(ZwrocTure())
         {
           _plansza[x][y] = _KRZYZYK;
+        }
+      else if(!ZwrocTure() && ReturnPvC())
+        {
+          _plansza[x][y] = _KOLKO;
+        }
+      else if(!ZwrocTure() && !ReturnPvC())
+        {
+          std::cout<<"Komputer"<<std::endl;
         }
     }
 
@@ -69,9 +77,8 @@ bool Gra::SprawdzCzyWygrana()
         suma += _plansza[i][j];
       }
 
-    if(suma == 3 || suma == -3)
+    if(std::abs(suma) == 3)
       {
-        _ktoWygral = true;
         return true;
       }
     else
@@ -89,7 +96,7 @@ bool Gra::SprawdzCzyWygrana()
         suma += _plansza[j][i];
       }
 
-    if(suma == 3 || suma == -3)
+    if(std::abs(suma) == 3)
       {
         _ktoWygral = true;
         return true;
@@ -98,6 +105,9 @@ bool Gra::SprawdzCzyWygrana()
      {
        suma = 0;
      }
+
+
+
   }
 
 
@@ -107,7 +117,7 @@ bool Gra::SprawdzCzyWygrana()
   {
    suma += _plansza[i][i];
   }
-  if(suma == 3 || suma == -3)
+  if(std::abs(suma) == 3)
   {
     _ktoWygral = true;
     return true;
@@ -115,15 +125,15 @@ bool Gra::SprawdzCzyWygrana()
 
   suma = 0;
 
-   int j = 2;
-  for(int i = 0; i < 3; ++i)
+
+   for(int i = 0; i < 3; ++i)
     {
-      suma = _plansza[i][j];
-      --j;
+      suma = _plansza[i][2-i];
+
     }
 
 
-  if(suma == 3 || suma == -3)
+  if(std::abs(suma) == 3)
   {
     _ktoWygral = true;
     return true;
@@ -132,11 +142,38 @@ bool Gra::SprawdzCzyWygrana()
   return false;
 }
 
-
-
-
 int Gra::ReturnPoziom()
 {
   return _poziomTrudnosci;
 }
 
+bool Gra::ReturnPvC()
+{
+  return _czyPvC;
+}
+
+void Gra::DrukujPlansze()
+{
+  for(int i = 0; i < 3; ++i)
+    {
+      for(int j = 0; j < 3; ++j)
+        {
+          std::cout<<"["<<ReturnPlansza(i,j)<<"]";
+        }
+  std::cout<<std::endl;
+    }
+
+  std::cout<<"====================="<<std::endl;
+
+}
+
+
+int Gra::ReturnPlansza(int x, int y)
+{
+  return _plansza[x][y];
+}
+
+void Gra::UstawPvC(bool pvc)
+{
+   _czyPvC = pvc;
+}
