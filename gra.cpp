@@ -34,7 +34,7 @@ void Gra::ZakonczGre()
     _czyStart  = true;
 }
 
-bool Gra::ZwrocWynik()
+int Gra::ZwrocWynik()
 {
     return _ktoWygral;
 }
@@ -68,78 +68,95 @@ bool Gra::Wypelnij(int const x, int const y)
 bool Gra::SprawdzCzyWygrana()
 {
   int suma = 0;
+
+  bool wygrana = false;
   //Poziome
 
-  for(int i = 0; i < 3; ++i)
-  {
-    for(int j = 0; j < 3; ++j)
-      {
-        suma += _plansza[i][j];
-      }
-
-    if(std::abs(suma) == 3)
-      {
-        return true;
-      }
-    else
+  if(!wygrana)
     {
-     suma = 0;
+      for(int i = 0; i < 3; ++i)
+      {
+        for(int j = 0; j < 3; ++j)
+          {
+            suma += _plansza[i][j];
+          }
+
+        if(std::abs(suma) == 3)
+          {
+            wygrana =  true;
+          }
+        else
+        {
+         suma = 0;
+        }
+      }
     }
-  }
 
   //Pionowe
-
- for(int i = 0; i < 3; ++i)
-  {
-    for(int j = 0; j < 3; ++j)
+ if(!wygrana)
+    {
+     for(int i = 0; i < 3; ++i)
       {
-        suma += _plansza[j][i];
-      }
+        for(int j = 0; j < 3; ++j)
+          {
+            suma += _plansza[j][i];
+          }
 
-    if(std::abs(suma) == 3)
-      {
-        _ktoWygral = true;
-        return true;
-      }
-    else
-     {
-       suma = 0;
-     }
+        if(std::abs(suma) == 3)
+          {
 
-
-
-  }
+            wygrana = true;
+          }
+        else
+         {
+           suma = 0;
+         }
+       }
+   }
 
 
 
   //Skosne
-  for(int i = 0; i < 3; ++i)
-  {
-   suma += _plansza[i][i];
-  }
-  if(std::abs(suma) == 3)
-  {
-    _ktoWygral = true;
-    return true;
-  }
-
-  suma = 0;
-
-
-   for(int i = 0; i < 3; ++i)
+ if(!wygrana)
+   {
+    for(int i = 0; i < 3; ++i)
     {
-      suma = _plansza[i][2-i];
+     suma += _plansza[i][i];
+    }
+    if(std::abs(suma) == 3)
+    {
 
+      wygrana = true;
+    }
+
+    suma = 0;
+   }
+
+  if(!wygrana)
+    {
+     for(int i = 0; i < 3; ++i)
+      {
+        suma = _plansza[i][2-i];
+
+      }
     }
 
 
   if(std::abs(suma) == 3)
   {
-    _ktoWygral = true;
-    return true;
+      wygrana = true;
   }
 
-  return false;
+  if(suma == _KOLKO * 3 )
+    {
+       _ktoWygral = _KOLKO;
+    }
+  else if(suma == _KRZYZYK * 3)
+    {
+        _ktoWygral = _KRZYZYK;
+    }
+
+  return wygrana;
 }
 
 int Gra::ReturnPoziom()

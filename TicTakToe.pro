@@ -28,13 +28,15 @@ SOURCES += \
         mainwindow.cpp \
     tura.cpp \
     gra.cpp \
-    przyciski.cpp
+    przyciski.cpp \
+    ai.cpp
 
 HEADERS += \
         mainwindow.h \
     tura.h \
     gra.h \
-    przyciski.h
+    przyciski.h \
+    ai.hh
 
 FORMS += \
         mainwindow.ui

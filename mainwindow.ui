@@ -778,10 +778,32 @@
      <string>Start</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label_wygrana">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>320</y>
+      <width>501</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>55</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
    <zorder>frame_2</zorder>
    <zorder>frame</zorder>
    <zorder>frame_3</zorder>
    <zorder>pushButton</zorder>
+   <zorder>label_wygrana</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

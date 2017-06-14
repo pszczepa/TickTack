@@ -9,20 +9,26 @@
 
 class Gra : public Tura, public Przyciski
 {
+public:
+
+  const int _KOLKO    = 1;
+  const int _KRZYZYK  = -1;
+  const int _PUSTE    = 0;
+
+  const int _GRACZ1    = _KRZYZYK;
+  const int _GRACZ2_AI = _KOLKO;
+
+private:
 
     bool _czyStart;
 
     bool _czyKoniec;
 
-    bool _ktoWygral;
+    int _ktoWygral;
 
     bool _czyPvC;
 
     int _poziomTrudnosci;
-
-    const int _KOLKO    = 1;
-    const int _KRZYZYK  = -1;
-    const int _PUSTE    = 0;
 
     int _plansza[3][3];
 
@@ -36,7 +42,7 @@ public:
 
     void ZakonczGre();
 
-    bool ZwrocWynik();
+    int ZwrocWynik();
 
     bool Wypelnij(int const , int const);
 

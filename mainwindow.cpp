@@ -184,8 +184,18 @@ void MainWindow::button_service(const int x, const int y, unsigned int button)
 
     if(_gra->SprawdzCzyWygrana())
       {
-        ui->label_10->setText("Wygrana");
-        //Wygrano, ktos, jescze nie wiadomo kto, i co dalej ??
+        if(_gra->ZwrocWynik() == _gra->_KRZYZYK)
+          {
+            ui->label_wygrana->setText("Wygral Krzyżyk");
+          }
+        else if (_gra->ZwrocWynik() == _gra->_KOLKO)
+          {
+            ui->label_wygrana->setText("Wygralo Kółko");
+          }
+
+        ui->label_wygrana->setEnabled(true);
+       // ui->label_wygrana->setGeometry(50,60,100,150);
+
       }
 
       _gra->DrukujPlansze();
