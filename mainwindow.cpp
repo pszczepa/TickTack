@@ -187,6 +187,7 @@ void MainWindow::button_service(const int x, const int y, unsigned int button)
         if(_gra->ZwrocWynik() == _gra->_KRZYZYK)
           {
             ui->label_wygrana->setText("Wygral Krzyżyk");
+
           }
         else if (_gra->ZwrocWynik() == _gra->_KOLKO)
           {
@@ -194,8 +195,6 @@ void MainWindow::button_service(const int x, const int y, unsigned int button)
           }
 
         ui->label_wygrana->setEnabled(true);
-       // ui->label_wygrana->setGeometry(50,60,100,150);
-
       }
 
       _gra->DrukujPlansze();

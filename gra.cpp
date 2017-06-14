@@ -70,8 +70,8 @@ bool Gra::SprawdzCzyWygrana()
   int suma = 0;
 
   bool wygrana = false;
-  //Poziome
 
+  //Poziome
   if(!wygrana)
     {
       for(int i = 0; i < 3; ++i)
@@ -91,7 +91,6 @@ bool Gra::SprawdzCzyWygrana()
         }
       }
     }
-
   //Pionowe
  if(!wygrana)
     {
@@ -104,7 +103,6 @@ bool Gra::SprawdzCzyWygrana()
 
         if(std::abs(suma) == 3)
           {
-
             wygrana = true;
           }
         else
@@ -113,9 +111,6 @@ bool Gra::SprawdzCzyWygrana()
          }
        }
    }
-
-
-
   //Skosne
  if(!wygrana)
    {
@@ -128,19 +123,20 @@ bool Gra::SprawdzCzyWygrana()
 
       wygrana = true;
     }
+    else
+      {
+        suma = 0;
+      }
 
-    suma = 0;
    }
 
   if(!wygrana)
     {
      for(int i = 0; i < 3; ++i)
       {
-        suma = _plansza[i][2-i];
-
+        suma += _plansza[i][2-i];
       }
     }
-
 
   if(std::abs(suma) == 3)
   {
@@ -154,6 +150,11 @@ bool Gra::SprawdzCzyWygrana()
   else if(suma == _KRZYZYK * 3)
     {
         _ktoWygral = _KRZYZYK;
+    }
+
+  if(wygrana)
+    {
+      std::cout<<"Wygrana"<<std::endl;
     }
 
   return wygrana;
