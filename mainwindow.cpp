@@ -204,11 +204,12 @@ void MainWindow::Odswiez(int miejsce)
 
   if(!_gra->ZwrocTure())
   {
-    temp = _gra->oReturn();
+    temp = _gra->xReturn();
   }
   else
   {
-    temp = _gra->xReturn();
+    temp = _gra->oReturn();
+
   }
 
   v_buttons.at(miejsce)->setEnabled(false);
@@ -227,15 +228,14 @@ void MainWindow::button_service(const int x, const int y, unsigned int button)
 
     ObslugaWygranej();
 
-    if(_gra->ZwrocPvC())
+    if(!_gra->ZwrocPvC() && !_gra->ZwrocKoniec())
     {
-       _gra->ZamienTure();
+
       std::cout<<"Komputer mysli" << std::endl;
       aiWpisano =  _ai->WykonajRuch(_gra);
+      _gra->ZamienTure();
       Odswiez(--aiWpisano);
       ObslugaWygranej();
-
-
     }
 
 
