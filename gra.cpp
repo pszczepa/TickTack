@@ -83,9 +83,9 @@ bool Gra::SprawdzCzyWygrana()
           }
 
         if(std::abs(suma) == 3)
-          {
-            wygrana =  true;
-          }
+        {
+          wygrana =  true;
+        }
         else
         {
          suma = 0;
@@ -94,7 +94,7 @@ bool Gra::SprawdzCzyWygrana()
     }
   //Pionowe
  if(!wygrana)
-    {
+  {
      for(int i = 0; i < 3; ++i)
       {
         for(int j = 0; j < 3; ++j)
@@ -121,7 +121,6 @@ bool Gra::SprawdzCzyWygrana()
     }
     if(std::abs(suma) == 3)
     {
-
       wygrana = true;
     }
     else
@@ -137,25 +136,26 @@ bool Gra::SprawdzCzyWygrana()
       {
         suma += _plansza[i][2-i];
       }
+
+     if(std::abs(suma) == 3)
+     {
+         wygrana = true;
+     }
     }
 
-  if(std::abs(suma) == 3)
-  {
-      wygrana = true;
-  }
 
-  if(suma == _KOLKO * 3 )
-    {
-       _ktoWygral = _KOLKO;
-    }
-  else if(suma == _KRZYZYK * 3)
-    {
-        _ktoWygral = _KRZYZYK;
-    }
 
   if(wygrana)
     {
       std::cout<<"Wygrana"<<std::endl;
+      if(suma == _KOLKO * 3 )
+        {
+           _ktoWygral = _KOLKO;
+        }
+      else if(suma == _KRZYZYK * 3)
+        {
+            _ktoWygral = _KRZYZYK;
+        }
     }
 
   return wygrana;
