@@ -7,10 +7,11 @@
 #include <vector>
 
 
-MainWindow::MainWindow(Gra * gra, QWidget *parent) :
+MainWindow::MainWindow(Gra * gra, AI * wsk_ai,QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    _gra(gra)
+    _gra(gra),
+    _ai(wsk_ai)
 {
     ui->setupUi(this);
 
@@ -110,15 +111,15 @@ void MainWindow::on_pushButton_clicked()
 {
   if(ui->radioLatwy)
     {
-        _gra->UstawPoziomTrudnosci(0);
+        _ai->UstawPoziomTrudnosci(0);
     }
   else if(ui->radioSredni)
     {
-        _gra->UstawPoziomTrudnosci(1);
+        _ai->UstawPoziomTrudnosci(1);
     }
   else
     {
-        _gra->UstawPoziomTrudnosci(2);
+        _ai->UstawPoziomTrudnosci(2);
     }
 
   _gra->RozpocznijGre(true);
@@ -162,40 +163,50 @@ void MainWindow::enableAll()
     }
 }
 
+void MainWindow::ObslugaWygranej()
+{
+  if(_gra->SprawdzCzyWygrana())
+    {
+      if(_gra->ZwrocWynik() == _gra->_KRZYZYK)
+        {
+          ui->label_wygrana->setText("Wygral Krzyżyk");
+
+        }
+      else if (_gra->ZwrocWynik() == _gra->_KOLKO)
+        {
+          ui->label_wygrana->setText("Wygralo Kółko");
+        }
+
+      ui->label_wygrana->setEnabled(true);
+    }
+}
+
 void MainWindow::button_service(const int x, const int y, unsigned int button)
 {
   QImage temp;
 
   if(_gra->ZwrocTure())
-    {
-      temp = _gra->oReturn();
-    }
+  {
+    temp = _gra->oReturn();
+  }
   else
-    {
-      temp = _gra->xReturn();
-    }
+  {
+    temp = _gra->xReturn();
+  }
 
+   _gra->Wypelnij(x,y);
+   _gra->ZamienTure();
 
     v_buttons.at(button)->setEnabled(false);
     v_labels.at(button)->setPixmap(QPixmap::fromImage(temp));
 
-    _gra->Wypelnij(x,y);
-    _gra->ZamienTure();
+    ObslugaWygranej();
 
-    if(_gra->SprawdzCzyWygrana())
-      {
-        if(_gra->ZwrocWynik() == _gra->_KRZYZYK)
-          {
-            ui->label_wygrana->setText("Wygral Krzyżyk");
 
-          }
-        else if (_gra->ZwrocWynik() == _gra->_KOLKO)
-          {
-            ui->label_wygrana->setText("Wygralo Kółko");
-          }
+  _ai->WykonajRuch(_gra);
 
-        ui->label_wygrana->setEnabled(true);
-      }
+
+
 
       _gra->DrukujPlansze();
 }

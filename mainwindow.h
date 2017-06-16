@@ -8,6 +8,7 @@
 #include <memory>
 
 #include "gra.h"
+#include "ai.hh"
 
 namespace Ui {
 class MainWindow;
@@ -18,7 +19,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(Gra * wsk_gra, QWidget *parent = 0);
+    explicit MainWindow(Gra * wsk_gra, AI * wsk_ai ,QWidget *parent = 0);
     ~MainWindow();
 
 private slots:
@@ -43,11 +44,15 @@ private:
 
     Gra  * _gra;
 
+    AI   * _ai;
+
     std::vector<std::shared_ptr<QLabel>>      v_labels;
 
     std::vector<std::shared_ptr<QPushButton>> v_buttons;
 
     void enableAll();
+
+    void ObslugaWygranej();
 
     void button_service(int const , int const, unsigned int button);
 

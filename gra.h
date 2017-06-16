@@ -24,13 +24,11 @@ private:
 
     bool _czyKoniec;
 
-    int _ktoWygral;
+    int  _ktoWygral;
 
     bool _czyPvC;
 
-    int _poziomTrudnosci;
-
-    int _plansza[3][3];
+    int  _plansza[3][3];
 
 public:
 
@@ -42,21 +40,20 @@ public:
 
     void ZakonczGre();
 
-    int ZwrocWynik();
+    int  ZwrocWynik();
 
     bool Wypelnij(int const , int const);
 
-    int ReturnPoziom();
-
     bool SprawdzCzyWygrana();
 
-    bool ReturnPvC();
+    bool ZwrocPvC();
 
     void DrukujPlansze();
 
-    int ReturnPlansza(int, int);
+    int  ReturnPlansza(int, int);
 
     void UstawPvC(bool);
+
 
 };
 

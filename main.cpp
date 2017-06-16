@@ -12,9 +12,11 @@ int main(int argc, char *argv[])
 {
     Gra          gra;
 
+    AI           ai;
+
     QApplication a(argc, argv);
 
-    MainWindow   w(&gra);
+    MainWindow   w(&gra, &ai);
 
 
 

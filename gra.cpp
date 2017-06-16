@@ -14,11 +14,6 @@ Gra::Gra()
 
 }
 
-void Gra::UstawPoziomTrudnosci(int poziom)
-{
-   _poziomTrudnosci = poziom;
-}
-
 void Gra::RozpocznijGre(bool tryb)
 {
     _czyStart  = true;
@@ -51,11 +46,11 @@ bool Gra::Wypelnij(int const x, int const y)
         {
           _plansza[x][y] = _KRZYZYK;
         }
-      else if(!ZwrocTure() && ReturnPvC())
+      else if(!ZwrocTure() && ZwrocPvC())
         {
           _plansza[x][y] = _KOLKO;
         }
-      else if(!ZwrocTure() && !ReturnPvC())
+      else if(!ZwrocTure() && !ZwrocPvC())
         {
           std::cout<<"Komputer"<<std::endl;
         }
@@ -160,12 +155,8 @@ bool Gra::SprawdzCzyWygrana()
   return wygrana;
 }
 
-int Gra::ReturnPoziom()
-{
-  return _poziomTrudnosci;
-}
 
-bool Gra::ReturnPvC()
+bool Gra::ZwrocPvC()
 {
   return _czyPvC;
 }
@@ -195,3 +186,4 @@ void Gra::UstawPvC(bool pvc)
 {
    _czyPvC = pvc;
 }
+
