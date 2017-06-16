@@ -109,11 +109,11 @@ void MainWindow::on_pushButton_9_clicked()
 
 void MainWindow::on_pushButton_clicked()
 {
-  if(ui->radioLatwy)
+  if(ui->radioLatwy->isChecked())
     {
         _ai->UstawPoziomTrudnosci(0);
     }
-  else if(ui->radioSredni)
+  else if(ui->radioSredni->isChecked())
     {
         _ai->UstawPoziomTrudnosci(1);
     }
@@ -138,8 +138,9 @@ void MainWindow::on_pushButton_10_clicked() //start
     {
       _gra->UstawPvC(false);
     }
-  else // AI
+  else if(ui->radioPvC->isChecked())// AI
     {
+      std::cout<<"PVC"<<std::endl;
       _gra->UstawPvC(true);
       ui->frame_2->setEnabled(true);
     }
@@ -163,6 +164,19 @@ void MainWindow::enableAll()
     }
 }
 
+void MainWindow::disableAll()
+{
+  for(size_t i = 0; i < v_labels.size(); ++i)
+    {
+       v_labels.at(i)->setEnabled(false);
+    }
+
+  for(size_t i = 0; i < v_buttons.size(); ++i)
+    {
+       v_buttons.at(i)->setEnabled(false);
+    }
+}
+
 void MainWindow::ObslugaWygranej()
 {
   if(_gra->SprawdzCzyWygrana())
@@ -178,14 +192,17 @@ void MainWindow::ObslugaWygranej()
         }
 
       ui->label_wygrana->setEnabled(true);
+
+      _gra->ZakonczGre();
+      disableAll();
     }
 }
 
-void MainWindow::button_service(const int x, const int y, unsigned int button)
+void MainWindow::Odswiez(int miejsce)
 {
   QImage temp;
 
-  if(_gra->ZwrocTure())
+  if(!_gra->ZwrocTure())
   {
     temp = _gra->oReturn();
   }
@@ -194,19 +211,35 @@ void MainWindow::button_service(const int x, const int y, unsigned int button)
     temp = _gra->xReturn();
   }
 
-   _gra->Wypelnij(x,y);
-   _gra->ZamienTure();
+  v_buttons.at(miejsce)->setEnabled(false);
+  v_labels.at(miejsce)->setPixmap(QPixmap::fromImage(temp));
+}
 
-    v_buttons.at(button)->setEnabled(false);
-    v_labels.at(button)->setPixmap(QPixmap::fromImage(temp));
+void MainWindow::button_service(const int x, const int y, unsigned int button)
+{
+  int aiWpisano;
+
+  if(!_gra->ZwrocKoniec())
+  {
+    _gra->Wypelnij(x,y);
+    _gra->ZamienTure();
+    Odswiez(button);
 
     ObslugaWygranej();
 
+    if(_gra->ZwrocPvC())
+    {
+       _gra->ZamienTure();
+      std::cout<<"Komputer mysli" << std::endl;
+      aiWpisano =  _ai->WykonajRuch(_gra);
+      Odswiez(--aiWpisano);
+      ObslugaWygranej();
 
-  _ai->WykonajRuch(_gra);
+
+    }
 
 
 
-
-      _gra->DrukujPlansze();
+     _gra->DrukujPlansze();
+    }
 }

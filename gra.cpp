@@ -34,6 +34,11 @@ int Gra::ZwrocWynik()
     return _ktoWygral;
 }
 
+bool Gra::ZwrocKoniec()
+{
+  return _czyKoniec;
+}
+
 bool Gra::Wypelnij(int const x, int const y)
 {
   if(_plansza[x][y] != _PUSTE)
@@ -52,6 +57,7 @@ bool Gra::Wypelnij(int const x, int const y)
         }
       else if(!ZwrocTure() && !ZwrocPvC())
         {
+          _plansza[x][y] = _KOLKO;
           std::cout<<"Komputer"<<std::endl;
         }
     }

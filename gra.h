@@ -40,6 +40,8 @@ public:
 
     void ZakonczGre();
 
+    bool ZwrocKoniec();
+
     int  ZwrocWynik();
 
     bool Wypelnij(int const , int const);

@@ -52,7 +52,11 @@ private:
 
     void enableAll();
 
+    void disableAll();
+
     void ObslugaWygranej();
+
+    void Odswiez(int);
 
     void button_service(int const , int const, unsigned int button);
 

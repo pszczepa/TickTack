@@ -10,12 +10,13 @@ void AI::UstawPoziomTrudnosci(int poziom)
   _poziomTrudnosci = poziom;
 }
 
-void AI::MinMax(Gra * gra)
+int AI::MinMax(Gra * gra)
 {
 // minmax
+  return -1;
 }
 
-void AI::AiRand(Gra * gra)
+int AI::AiRand(Gra * gra)
 {
   int x,y;
   bool czyWpisano = false;
@@ -29,18 +30,22 @@ void AI::AiRand(Gra * gra)
 
   czyWpisano = gra->Wypelnij(x,y);
 
-   }while(!czyWpisano);
+  }while(!czyWpisano);
+
+  return MatrixToInt(x,y);
 
 }
 
-void AI::WykonajRuch(Gra * gra)
+int AI::WykonajRuch(Gra * gra)
 {
+  int gdzieWpisano;
+
   switch (_poziomTrudnosci)
     {
       case 0:
       {
         std::cout<<"Izi"<<std::endl;
-        AiRand(gra);
+        gdzieWpisano = AiRand(gra);
 
       }
 
@@ -48,4 +53,17 @@ void AI::WykonajRuch(Gra * gra)
       default:
       break;
     }
+
+  return gdzieWpisano;
 }
+
+int AI::MatrixToInt(int x, int y)
+{
+ int trans[3][3] = {{1,2,3},
+                   {4,5,6},
+                   {7,8,9}};
+
+ return trans[x][y];
+
+}
+

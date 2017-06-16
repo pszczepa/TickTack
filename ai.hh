@@ -16,10 +16,13 @@ public:
 
   void UstawPoziomTrudnosci(int);
 
-  void MinMax(Gra * );
-  void AiRand(Gra * );
+  int MinMax(Gra * );
+  int AiRand(Gra * );
 
-  void WykonajRuch(Gra *);
+  int WykonajRuch(Gra *);
+
+  int MatrixToInt(int, int);
+
 
 };
 
