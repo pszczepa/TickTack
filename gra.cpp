@@ -12,15 +12,16 @@ Gra::Gra()
         }
     }
 
+    _iloscRuchow = 0;
+
 }
 
-void Gra::RozpocznijGre(bool tryb)
+void Gra::RozpocznijGre()
 {
     _czyStart  = true;
 
     _czyKoniec = false;
 
-    _czyPvC    = tryb;
 }
 
 void Gra::ZakonczGre()
@@ -158,6 +159,7 @@ bool Gra::SprawdzCzyWygrana()
         }
     }
 
+
   return wygrana;
 }
 
@@ -193,3 +195,12 @@ void Gra::UstawPvC(bool pvc)
    _czyPvC = pvc;
 }
 
+void Gra::PlusIloscRuchow()
+{
+  ++_iloscRuchow;
+}
+
+int Gra::ZwrocIloscRuchow()
+{
+  return _iloscRuchow;
+}

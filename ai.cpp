@@ -25,10 +25,13 @@ int AI::AiRand(Gra * gra)
 
   do
   {
-  x = (std::rand()%2) + 0;
-  y = (std::rand()%2) + 0;
+  x = (std::rand()%3) + 0;
+  y = (std::rand()%3) + 0;
+
+  std::cout<<"AiRand: "<<x<<" : " <<y<< std::endl;
 
   czyWpisano = gra->Wypelnij(x,y);
+
 
   }while(!czyWpisano);
 

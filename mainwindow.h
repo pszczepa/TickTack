@@ -54,7 +54,7 @@ private:
 
     void disableAll();
 
-    void ObslugaWygranej();
+    bool ObslugaWygranej();
 
     void Odswiez(int);
 

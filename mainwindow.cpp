@@ -107,22 +107,31 @@ void MainWindow::on_pushButton_9_clicked()
   button_service(2,2,8);
 }
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_pushButton_clicked() //start
 {
-  if(ui->radioLatwy->isChecked())
-    {
-        _ai->UstawPoziomTrudnosci(0);
-    }
-  else if(ui->radioSredni->isChecked())
-    {
-        _ai->UstawPoziomTrudnosci(1);
-    }
-  else
-    {
-        _ai->UstawPoziomTrudnosci(2);
-    }
 
-  _gra->RozpocznijGre(true);
+  if(_gra->ZwrocPvC())
+   {
+    if(ui->radioLatwy->isChecked())
+      {
+          _ai->UstawPoziomTrudnosci(0);
+          std::cout<<"Latwy"<<std::endl;
+
+      }
+    else if(ui->radioSredni->isChecked())
+      {
+          _ai->UstawPoziomTrudnosci(1);
+      }
+    else
+      {
+          _ai->UstawPoziomTrudnosci(2);
+      }
+   }
+
+
+  _gra->RozpocznijGre();
+  std::cout<<"Rozpoczynanie"<<std::endl;
+
   ui->frame->setEnabled(true);
   ui->frame_2->setEnabled(false);
   ui->frame_3->setEnabled(false);
@@ -132,10 +141,12 @@ void MainWindow::on_pushButton_clicked()
 
 }
 
-void MainWindow::on_pushButton_10_clicked() //start
+void MainWindow::on_pushButton_10_clicked() //ok
 {
   if(ui->radioPvP->isChecked())
     {
+      std::cout<<"PVP"<<std::endl;
+
       _gra->UstawPvC(false);
     }
   else if(ui->radioPvC->isChecked())// AI
@@ -177,8 +188,10 @@ void MainWindow::disableAll()
     }
 }
 
-void MainWindow::ObslugaWygranej()
+bool MainWindow::ObslugaWygranej()
 {
+  bool koniec = false;
+
   if(_gra->SprawdzCzyWygrana())
     {
       if(_gra->ZwrocWynik() == _gra->_KRZYZYK)
@@ -186,16 +199,28 @@ void MainWindow::ObslugaWygranej()
           ui->label_wygrana->setText("Wygral Krzyżyk");
 
         }
-      else if (_gra->ZwrocWynik() == _gra->_KOLKO)
+      else if(_gra->ZwrocWynik() == _gra->_KOLKO)
         {
           ui->label_wygrana->setText("Wygralo Kółko");
         }
 
       ui->label_wygrana->setEnabled(true);
-
       _gra->ZakonczGre();
       disableAll();
+      koniec = true;
+
     }
+
+  if(!_gra->SprawdzCzyWygrana() && _gra->ZwrocIloscRuchow() >= 9)
+    {
+       ui->label_wygrana->setText("Remis");
+       _gra->ZakonczGre();
+       disableAll();
+       koniec = true;
+    }
+
+  return koniec;
+
 }
 
 void MainWindow::Odswiez(int miejsce)
@@ -220,26 +245,44 @@ void MainWindow::button_service(const int x, const int y, unsigned int button)
 {
   int aiWpisano;
 
-  if(!_gra->ZwrocKoniec())
+  if(!_gra->ZwrocKoniec() && !_gra->ZwrocPvC())
   {
+     std::cout<<"Gra, PVP, wykryto wcisniecie"<<std::endl;
+
     _gra->Wypelnij(x,y);
     _gra->ZamienTure();
     Odswiez(button);
 
     ObslugaWygranej();
 
-    if(!_gra->ZwrocPvC() && !_gra->ZwrocKoniec())
+  }
+
+  if(_gra->ZwrocPvC() && !_gra->ZwrocKoniec())
     {
 
-      std::cout<<"Komputer mysli" << std::endl;
-      aiWpisano =  _ai->WykonajRuch(_gra);
-      _gra->ZamienTure();
-      Odswiez(--aiWpisano);
+      std::cout<<"Gra, PVC, wykryto wcisniecie"<<std::endl;
+      _gra->Wypelnij(x,y);
+      Odswiez(button);
       ObslugaWygranej();
-    }
 
+
+      if(!_gra->ZwrocKoniec())
+        {
+          std::cout<<"Komputer mysli" << std::endl;
+          _gra->ZamienTure();
+          aiWpisano =  _ai->WykonajRuch(_gra);
+          Odswiez(--aiWpisano);
+          _gra->ZamienTure();
+          ObslugaWygranej();
+        }
+
+
+    }
 
 
      _gra->DrukujPlansze();
-    }
+
+     std::cout<<"Button"<<std::endl;
+
+
 }

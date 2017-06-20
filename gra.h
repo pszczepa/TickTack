@@ -30,13 +30,15 @@ private:
 
     int  _plansza[3][3];
 
+    int _iloscRuchow;
+
 public:
 
     Gra();
 
     void UstawPoziomTrudnosci(int const);
 
-    void RozpocznijGre(bool);
+    void RozpocznijGre();
 
     void ZakonczGre();
 
@@ -55,6 +57,10 @@ public:
     int  ReturnPlansza(int, int);
 
     void UstawPvC(bool);
+
+    void PlusIloscRuchow();
+
+    int ZwrocIloscRuchow();
 
 
 };
