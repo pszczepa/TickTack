@@ -212,7 +212,7 @@ bool MainWindow::ObslugaWygranej()
 
     }
 
-  if(!_gra->SprawdzCzyWygrana() && _gra->ZwrocIloscRuchow() >= 9)
+  if(!_gra->SprawdzCzyWygrana() && _gra->ZwrocIloscRuchow() > 8 )
     {
        ui->label_wygrana->setText("Remis");
        _gra->ZakonczGre();
@@ -252,6 +252,7 @@ void MainWindow::Odswiez()
   int miejsce;
 
   _gra->PlusIloscRuchow();
+  std::cout<<"IlosRuchow: "<< _gra->ZwrocIloscRuchow() <<std::endl;
 
   if(!_gra->ZwrocTure())
   {
@@ -314,7 +315,7 @@ void MainWindow::button_service(const int x, const int y, unsigned int button)
       if(!_gra->ZwrocKoniec())
         {
           std::cout<<"Komputer mysli" << std::endl;
-          aiWpisano =  _ai->WykonajRuch(_gra);
+          aiWpisano =  _ai->WykonajRuch(*_gra);
           Odswiez();
           _gra->ZamienTure();
           ObslugaWygranej();

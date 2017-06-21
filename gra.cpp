@@ -13,6 +13,7 @@ Gra::Gra()
     }
 
     _iloscRuchow = 0;
+    _ktoWygral = 99;
 
 }
 
@@ -156,12 +157,18 @@ bool Gra::SprawdzCzyWygrana()
       std::cout<<"Wygrana"<<std::endl;
       if(suma == _KOLKO * 3 )
         {
-           _ktoWygral = _KOLKO;
+           _ktoWygral = _GRACZ1;
         }
       else if(suma == _KRZYZYK * 3)
         {
-            _ktoWygral = _KRZYZYK;
+            _ktoWygral = _GRACZ2_AI;
         }
+
+    }
+
+  if(ZwrocIloscRuchow() > 8)
+    {
+      _ktoWygral = _PUSTE;
     }
 
 

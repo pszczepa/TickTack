@@ -10,105 +10,73 @@ void AI::UstawPoziomTrudnosci(int poziom)
   _poziomTrudnosci = poziom;
 }
 
-AiRuch AI::MinMax(Gra * gra)
+AiRuch AI::MinMax(Gra & gra, int gracz)
 { 
   AiRuch ruch;
   AiRuch temp;
-  int gracz;
-  int wynik;
+  int wynik_gry;
   std::vector<AiRuch> v_ruch;
+
   int najlepszyRuch  = 0;
   int najlepszyWynik = 0;
 
-    //gra->ZamienTure();
-
-  std::cout<<"MinMax"<<std::endl;
-
-  if(!gra->SprawdzCzyWygrana())
-
-{
-  wynik = gra->ZwrocWynik();
-
-  if(gra->SprawdzCzyWygrana())
-  {
-    if(wynik == gra->_GRACZ1)
-      {
-          temp.wynik = 10;
-          return temp;
-      }
-    else if (wynik == gra->_GRACZ2_AI)
-      {
-          temp.wynik = -10;
-          return temp;
-      }
-     else if(wynik != gra->_GRACZ1 && wynik != gra->_GRACZ2_AI)
-      {
-          temp.wynik = 0;
-          return temp;
-      }
-   }
+  gra.SprawdzCzyWygrana();
+  wynik_gry = gra.ZwrocWynik();
 
 
-
-
-  if(gra->ZwrocTure())
+  if(wynik_gry == gra._GRACZ2_AI)
     {
-      gracz = gra->_KOLKO;
+      temp.wynik = 10;
+      return temp;
     }
-  else
+  else if(wynik_gry  == gra._GRACZ1)
     {
-      gracz = gra->_KRZYZYK;
+      temp.wynik = -10;
+      return temp;
+    }
+  else if(wynik_gry  == gra._PUSTE)
+   {
+      temp.wynik = 0;
+      return temp;
     }
 
-  gra->DrukujPlansze();
 
-  for(int i = 0; i < 3; ++i)
-    {
-      for(int j = 0; j < 3; ++j)
-        {
-          if(gra->ReturnPlansza(i,j) == 0)
-            {
-              std::cout<<"petla"<<std::endl;
+    for(int x = 0; x < 3; ++x)
+      {
+        for(int y = 0; y < 3; ++y)
+          {
+            if(gra.ReturnPlansza(x,y) == gra._PUSTE)
+              {
+                ruch.x = x;
+                ruch.y = y;
 
-              ruch.x = i;
-              ruch.y = j;
-              gra->Wypelnij(i,j, gracz);
+                gra.Wypelnij(x,y,gracz);
+                if(gracz == gra._GRACZ2_AI)
+                  {
+                     ruch.wynik = MinMax(gra, gra._GRACZ1).wynik;
 
-              if(gracz == gra->_GRACZ1)
-                {
-                  temp = MinMax(gra);
-                  ruch.wynik = temp.wynik;
-                }
-              else
-                {
-                  temp = MinMax(gra);
-                  ruch.wynik = temp.wynik;
-                }
-              gra->ZamienTure();
+                  }
+                else
+                  {
+                    ruch.wynik = MinMax(gra, gra._GRACZ2_AI).wynik;
+
+                  }
 
 
-              v_ruch.push_back(ruch);
+                v_ruch.push_back(ruch);
+                gra.Wypelnij(x,y,gra._PUSTE);
+              }
+          }
+      }
 
-              gra->Wypelnij(i,j,gra->_PUSTE);
-
-            }
-
-
-        }
-    }
-
-  std::cout<<"Rozmiar : " << v_ruch.size() << std::endl;
-
-}
-    if(gracz == gra->_GRACZ1)
+    if(gracz == gra._GRACZ2_AI)
       {
         najlepszyWynik = -100000;
-
-        for(unsigned int i = 0; i < v_ruch.size() ; ++i)
+        for(int i = 0; i < v_ruch.size(); ++i)
           {
-            if(v_ruch[i].wynik > najlepszyWynik)
+            if(v_ruch.at(i).wynik > najlepszyWynik)
               {
-                najlepszyRuch  = i;
+                najlepszyRuch = i;
                 najlepszyWynik = v_ruch.at(i).wynik;
               }
           }
@@ -116,8 +84,7 @@ AiRuch AI::MinMax(Gra * gra)
     else
       {
         najlepszyWynik = 100000;
-
-        for(unsigned int i = 0; i < v_ruch.size(); ++i)
+        for(int i = 0; i < v_ruch.size(); ++i)
           {
             if(v_ruch.at(i).wynik < najlepszyWynik)
               {
@@ -127,25 +94,20 @@ AiRuch AI::MinMax(Gra * gra)
           }
       }
 
-
-
-std::cout<<"Najlpeszy ruch : " << v_ruch.at(najlepszyRuch).x << v_ruch.at(najlepszyRuch).y << std::endl;
-
 return v_ruch.at(najlepszyRuch);
-
 }
 
 
-void AI::MinMaxRuch(Gra * gra)
+void AI::MinMaxRuch(Gra & gra)
 {
-    AiRuch ruch = MinMax(gra);
+    AiRuch ruch = MinMax(gra, gra._GRACZ2_AI);
 
-    std::cout<<"Wpisywanie z MM : "<<ruch.x<<":"<<ruch.y<<std::endl;
-    gra->Wypelnij(ruch.x,ruch.y, gra->_GRACZ2_AI);
+    std::cout<<"Wpisywanie z MinMax : "<<ruch.x<<":"<<ruch.y<<std::endl;
+    gra.Wypelnij(ruch.x,ruch.y, gra._GRACZ2_AI);
 }
 
 
-int AI::AiRand(Gra * gra)
+int AI::AiRand(Gra & gra)
 {
   int x,y;
   bool czyWpisano = false;
@@ -159,7 +121,7 @@ int AI::AiRand(Gra * gra)
 
   std::cout<<"AiRand: "<<x<<" : " <<y<< std::endl;
 
-  czyWpisano = gra->Wypelnij(x,y);
+  czyWpisano = gra.Wypelnij(x,y);
 
 
   }while(!czyWpisano);
@@ -168,7 +130,7 @@ int AI::AiRand(Gra * gra)
 
 }
 
-int AI::WykonajRuch(Gra * gra)
+int AI::WykonajRuch(Gra & gra)
 {
   int gdzieWpisano;
 
