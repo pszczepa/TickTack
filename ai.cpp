@@ -12,69 +12,76 @@ void AI::UstawPoziomTrudnosci(int poziom)
 
 AiRuch AI::MinMax(Gra & gra, int gracz)
 { 
+  gra.DrukujPlansze();
+
   AiRuch ruch;
   AiRuch temp;
+
   int wynik_gry;
   std::vector<AiRuch> v_ruch;
 
   int najlepszyRuch  = 0;
   int najlepszyWynik = 0;
 
+
   gra.SprawdzCzyWygrana();
   wynik_gry = gra.ZwrocWynik();
 
-
-  if(wynik_gry == gra._GRACZ2_AI)
+  if(wynik_gry == -1)
     {
       temp.wynik = 10;
+      std::cout<<"Zwracam1"<<std::endl;
       return temp;
     }
-  else if(wynik_gry  == gra._GRACZ1)
+  else if(wynik_gry  == 1)
     {
       temp.wynik = -10;
+      std::cout<<"Zwracam2"<<std::endl;
       return temp;
     }
-  else if(wynik_gry  == gra._PUSTE)
+  else if(wynik_gry  == 0)
    {
       temp.wynik = 0;
+      std::cout<<"Zwracam3"<<std::endl;
       return temp;
     }
 
 
-    for(int x = 0; x < 3; ++x)
+    for(int y = 0; y < 3 ; ++y)
       {
-        for(int y = 0; y < 3; ++y)
+        for(int x = 0; x < 3; ++x)
           {
-            if(gra.ReturnPlansza(x,y) == gra._PUSTE)
+            if(gra.ReturnPlansza(x,y) == 0)
               {
                 ruch.x = x;
                 ruch.y = y;
 
                 gra.Wypelnij(x,y,gracz);
-                if(gracz == gra._GRACZ2_AI)
-                  {
-                     ruch.wynik = MinMax(gra, gra._GRACZ1).wynik;
 
+                if(gracz == -1)
+                  {
+                    ruch.wynik = MinMax(gra, 1).wynik;
                   }
                 else
                   {
-                    ruch.wynik = MinMax(gra, gra._GRACZ2_AI).wynik;
-
+                    ruch.wynik = MinMax(gra, -1).wynik;
                   }
 
-
                 v_ruch.push_back(ruch);
-                gra.Wypelnij(x,y,gra._PUSTE);
+
+                gra.Wypelnij(x,y,0);
+
               }
           }
       }
 
-    if(gracz == gra._GRACZ2_AI)
+
+    if(gracz == -1)
       {
-        najlepszyWynik = -100000;
-        for(int i = 0; i < v_ruch.size(); ++i)
+        najlepszyWynik = -1000000;
+        for(unsigned int i = 0; i < v_ruch.size(); i++)
           {
-            if(v_ruch.at(i).wynik > najlepszyWynik)
+            if(v_ruch[i].wynik > najlepszyWynik)
               {
                 najlepszyRuch = i;
                 najlepszyWynik = v_ruch.at(i).wynik;
@@ -83,10 +90,10 @@ AiRuch AI::MinMax(Gra & gra, int gracz)
       }
     else
       {
-        najlepszyWynik = 100000;
-        for(int i = 0; i < v_ruch.size(); ++i)
+        najlepszyWynik = 1000000;
+        for(unsigned int i = 0; i < v_ruch.size(); i++)
           {
-            if(v_ruch.at(i).wynik < najlepszyWynik)
+            if(v_ruch[i].wynik < najlepszyWynik)
               {
                 najlepszyRuch = i;
                 najlepszyWynik = v_ruch.at(i).wynik;
@@ -94,20 +101,35 @@ AiRuch AI::MinMax(Gra & gra, int gracz)
           }
       }
 
-return v_ruch.at(najlepszyRuch);
+    std::cout<<"Najlepszy ruch: " << najlepszyRuch << std::endl;
+
+    for(size_t it = 0; it < v_ruch.size(); ++it)
+      {
+        std::cout<<v_ruch.at(it).x<<" "<<v_ruch.at(it).y<<" "<< v_ruch.at(it).wynik<<std::endl;
+      }
+
+
+
+return v_ruch[najlepszyRuch];
 }
 
 
 void AI::MinMaxRuch(Gra & gra)
 {
-    AiRuch ruch = MinMax(gra, gra._GRACZ2_AI);
+    AiRuch ruch = MinMax(gra, -1);
+
+    if(ruch.x > 2 || ruch.x < 0 || ruch.y  > 2 || ruch.y < 0 )
+      {
+        std::cout<<"ERRROR"<<std::endl;
+      }
 
     std::cout<<"Wpisywanie z MinMax : "<<ruch.x<<":"<<ruch.y<<std::endl;
-    gra.Wypelnij(ruch.x,ruch.y, gra._GRACZ2_AI);
+    gra.Wypelnij(ruch.x,ruch.y, -1);
+    gra.Zeruj();
 }
 
 
-int AI::AiRand(Gra & gra)
+int AI::AiRand(Gra * gra)
 {
   int x,y;
   bool czyWpisano = false;
@@ -121,7 +143,7 @@ int AI::AiRand(Gra & gra)
 
   std::cout<<"AiRand: "<<x<<" : " <<y<< std::endl;
 
-  czyWpisano = gra.Wypelnij(x,y);
+  czyWpisano = gra->Wypelnij(x,y);
 
 
   }while(!czyWpisano);
@@ -130,7 +152,7 @@ int AI::AiRand(Gra & gra)
 
 }
 
-int AI::WykonajRuch(Gra & gra)
+int AI::WykonajRuch(Gra * gra)
 {
   int gdzieWpisano;
 
@@ -146,7 +168,7 @@ int AI::WykonajRuch(Gra & gra)
       case 1:
       {
         std::cout<<"Trudniej"<<std::endl;
-        MinMaxRuch(gra);
+        MinMaxRuch(*gra);
 
         break;
       }

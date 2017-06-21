@@ -636,7 +636,7 @@
       <x>10</x>
       <y>100</y>
       <width>151</width>
-      <height>181</height>
+      <height>141</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -690,20 +690,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Średni</string>
-     </property>
-    </widget>
-    <widget class="QRadioButton" name="radioTrudny">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>150</y>
-       <width>112</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Nie wygrasz</string>
+      <string>Trudny</string>
      </property>
     </widget>
    </widget>
@@ -772,7 +759,7 @@
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>290</y>
+      <y>250</y>
       <width>89</width>
       <height>25</height>
      </rect>
@@ -787,9 +774,9 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>315</y>
-      <width>251</width>
+      <x>10</x>
+      <y>280</y>
+      <width>161</width>
       <height>41</height>
      </rect>
     </property>

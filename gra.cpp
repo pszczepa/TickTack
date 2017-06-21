@@ -155,13 +155,13 @@ bool Gra::SprawdzCzyWygrana()
   if(wygrana)
     {
       std::cout<<"Wygrana"<<std::endl;
-      if(suma == _KOLKO * 3 )
+      if(suma > 0 )
         {
-           _ktoWygral = _GRACZ1;
+           _ktoWygral = 1;
         }
-      else if(suma == _KRZYZYK * 3)
+      else if(suma < 0)
         {
-            _ktoWygral = _GRACZ2_AI;
+            _ktoWygral = -1;
         }
 
     }
@@ -215,4 +215,9 @@ void Gra::PlusIloscRuchow()
 int Gra::ZwrocIloscRuchow()
 {
   return _iloscRuchow;
+}
+
+void Gra::Zeruj()
+{
+  _ktoWygral = 99;
 }

@@ -315,7 +315,7 @@ void MainWindow::button_service(const int x, const int y, unsigned int button)
       if(!_gra->ZwrocKoniec())
         {
           std::cout<<"Komputer mysli" << std::endl;
-          aiWpisano =  _ai->WykonajRuch(*_gra);
+          _ai->WykonajRuch(_gra);
           Odswiez();
           _gra->ZamienTure();
           ObslugaWygranej();

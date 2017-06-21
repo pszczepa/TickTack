@@ -64,6 +64,8 @@ public:
 
     int ZwrocIloscRuchow();
 
+    void Zeruj();
+
 
 };
 

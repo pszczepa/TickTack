@@ -19,11 +19,11 @@ public:
   void UstawPoziomTrudnosci(int);
 
   AiRuch MinMax(Gra &, int);
-  int AiRand(Gra & );
+  int AiRand(Gra * );
 
   void MinMaxRuch(Gra &);
 
-  int WykonajRuch(Gra &);
+  int WykonajRuch(Gra *);
 
   int MatrixToInt(int, int);
 
