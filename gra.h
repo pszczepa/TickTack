@@ -48,6 +48,8 @@ public:
 
     bool Wypelnij(int const , int const);
 
+    void Wypelnij(int const, int const , int);
+
     bool SprawdzCzyWygrana();
 
     bool ZwrocPvC();

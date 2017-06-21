@@ -29,14 +29,16 @@ SOURCES += \
     tura.cpp \
     gra.cpp \
     przyciski.cpp \
-    ai.cpp
+    ai.cpp \
+    airuch.cpp
 
 HEADERS += \
         mainwindow.h \
     tura.h \
     gra.h \
     przyciski.h \
-    ai.hh
+    ai.hh \
+    airuch.hh
 
 FORMS += \
         mainwindow.ui

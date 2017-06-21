@@ -132,6 +132,7 @@ void MainWindow::on_pushButton_clicked() //start
   _gra->RozpocznijGre();
   std::cout<<"Rozpoczynanie"<<std::endl;
 
+  ui->label_wygrana->setText("Tura O");
   ui->frame->setEnabled(true);
   ui->frame_2->setEnabled(false);
   ui->frame_3->setEnabled(false);
@@ -230,15 +231,57 @@ void MainWindow::Odswiez(int miejsce)
   if(!_gra->ZwrocTure())
   {
     temp = _gra->xReturn();
+    ui->label_wygrana->setText("Tura O");
   }
   else
   {
+    ui->label_wygrana->setText("Tura X");
     temp = _gra->oReturn();
 
   }
 
   v_buttons.at(miejsce)->setEnabled(false);
   v_labels.at(miejsce)->setPixmap(QPixmap::fromImage(temp));
+}
+
+void MainWindow::Odswiez()
+{
+  int trans[3][3] = {{0,1,2},
+                    {3,4,5},
+                    {6,7,8}};
+  int miejsce;
+
+  _gra->PlusIloscRuchow();
+
+  if(!_gra->ZwrocTure())
+  {
+    ui->label_wygrana->setText("Tura O");
+  }
+  else
+  {
+    ui->label_wygrana->setText("Tura X");
+  }
+
+
+  for(int i = 0; i < 3; ++i)
+    {
+      for(int j = 0; j < 3; ++j)
+        {
+            if(_gra->ReturnPlansza(i,j) == _gra->_KOLKO)
+              {
+                miejsce = trans[i][j];
+                v_buttons.at(miejsce)->setEnabled(false);
+                v_labels.at(miejsce)->setPixmap(QPixmap::fromImage(_gra->oReturn()));
+              }
+            else if(_gra->ReturnPlansza(i,j) == _gra->_KRZYZYK)
+              {
+                miejsce = trans[i][j];
+                v_buttons.at(miejsce)->setEnabled(false);
+                v_labels.at(miejsce)->setPixmap(QPixmap::fromImage(_gra->xReturn()));
+              }
+        }
+    }
+
 }
 
 void MainWindow::button_service(const int x, const int y, unsigned int button)
@@ -251,8 +294,8 @@ void MainWindow::button_service(const int x, const int y, unsigned int button)
 
     _gra->Wypelnij(x,y);
     _gra->ZamienTure();
-    Odswiez(button);
-
+    //Odswiez(button);
+    Odswiez();
     ObslugaWygranej();
 
   }
@@ -262,16 +305,17 @@ void MainWindow::button_service(const int x, const int y, unsigned int button)
 
       std::cout<<"Gra, PVC, wykryto wcisniecie"<<std::endl;
       _gra->Wypelnij(x,y);
-      Odswiez(button);
+      _gra->ZamienTure();
+      //Odswiez(button);
+      Odswiez();
       ObslugaWygranej();
 
 
       if(!_gra->ZwrocKoniec())
         {
           std::cout<<"Komputer mysli" << std::endl;
-          _gra->ZamienTure();
           aiWpisano =  _ai->WykonajRuch(_gra);
-          Odswiez(--aiWpisano);
+          Odswiez();
           _gra->ZamienTure();
           ObslugaWygranej();
         }

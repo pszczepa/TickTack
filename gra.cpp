@@ -67,6 +67,11 @@ bool Gra::Wypelnij(int const x, int const y)
 }
 
 
+void Gra::Wypelnij(const int x, const int y, int wartosc)
+{
+  _plansza[x][y] = wartosc;
+}
+
 bool Gra::SprawdzCzyWygrana()
 {
   int suma = 0;

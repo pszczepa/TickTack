@@ -58,6 +58,8 @@ private:
 
     void Odswiez(int);
 
+    void Odswiez();
+
     void button_service(int const , int const, unsigned int button);
 
 };

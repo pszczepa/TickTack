@@ -787,15 +787,15 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>320</y>
-      <width>501</width>
+      <x>140</x>
+      <y>315</y>
+      <width>251</width>
       <height>41</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>55</pointsize>
+      <pointsize>15</pointsize>
      </font>
     </property>
     <property name="text">

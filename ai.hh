@@ -4,8 +4,10 @@
 #include <iostream>
 #include <ctime>
 #include <cmath>
+#include <vector>
 
 #include "gra.h"
+#include "airuch.hh"
 
 class AI
 {
@@ -16,12 +18,15 @@ public:
 
   void UstawPoziomTrudnosci(int);
 
-  int MinMax(Gra * );
+  AiRuch MinMax(Gra *);
   int AiRand(Gra * );
+
+  void MinMaxRuch(Gra *);
 
   int WykonajRuch(Gra *);
 
   int MatrixToInt(int, int);
+
 
 
 };
